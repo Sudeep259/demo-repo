@@ -1,1 +1,299 @@
-<p>This is a local repo.</p>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Git & GitHub Cheat Sheet — A4 Printable</title>
+<style>
+  /* A4 print settings */
+  @page { size: A4; margin: 16mm; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #111; line-height: 1.3; margin: 0; padding: 8mm; }
+  h1 { font-size: 22px; margin: 0 0 8px 0; }
+  h2 { font-size: 14px; margin: 14px 0 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+  h3 { font-size: 12px; margin: 8px 0 4px; }
+  p { margin: 6px 0; font-size: 11px; }
+  .two-column { display: flex; gap: 24px; }
+  .col { flex: 1 1 0; }
+  .cmd { font-family: "Courier New", monospace; background: #f7f7f7; padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 12px; font-size: 11px; }
+  td, th { vertical-align: top; padding: 6px 8px; border: 0; }
+  .command { width: 36%; white-space: nowrap; }
+  .example { color: #333; font-family: monospace; background: #fbfbfb; padding: 4px 6px; display: inline-block; border-radius: 3px; font-size: 11px; }
+  .note { font-size: 10px; color: #555; margin-top: 4px; }
+  .section { margin-bottom: 12px; }
+  .scenario { background: #f4faff; border-left: 4px solid #3b82f6; padding: 8px; margin: 8px 0; font-size: 11px; }
+  footer { font-size: 10px; color: #666; margin-top: 12px; border-top: 1px solid #eee; padding-top: 8px; }
+  pre { background: #111; color: #e6e6e6; padding: 8px; border-radius: 4px; overflow-x:auto; font-size: 11px; }
+  .small { font-size: 10px; color: #444; }
+  /* Print adjustments */
+  @media print {
+    body { padding: 4mm; }
+    .two-column { display: block; }
+  }
+</style>
+</head>
+<body>
+  <h1>Git &amp; GitHub — Complete Command Cheat Sheet (A4 Printable)</h1>
+  <p class="small">Commands, short examples and when to use them. Real-world scenarios + step-by-step resolutions included. Save this page as PDF for offline study.</p>
+
+  <h2>Setup &amp; Configuration</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git --version</span></td><td>Check Git is installed. <span class="example">git --version</span></td></tr>
+    <tr><td class="command"><span class="cmd">git config --global user.name</span></td><td>Set author name. <span class="example">git config --global user.name "Sudeep Kumar"</span></td></tr>
+    <tr><td class="command"><span class="cmd">git config --global user.email</span></td><td>Set author email. <span class="example">git config --global user.email "you@domain.com"</span></td></tr>
+    <tr><td class="command"><span class="cmd">git config core.editor</span></td><td>Set commit editor. <span class="example">git config core.editor "code --wait"</span></td></tr>
+    <tr><td class="command"><span class="cmd">git help &lt;cmd&gt;</span></td><td>Open help page. <span class="example">git help commit</span></td></tr>
+  </table>
+
+  <h2>Create / Clone Repositories</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git init</span></td><td>Create new local repo. <span class="example">git init</span></td></tr>
+    <tr><td class="command"><span class="cmd">git clone &lt;url&gt;</span></td><td>Clone remote repo locally. <span class="example">git clone https://github.com/you/repo.git</span></td></tr>
+    <tr><td class="command"><span class="cmd">git clone --depth 1 &lt;url&gt;</span></td><td>Shallow clone (no full history). <span class="example">git clone --depth 1 ...</span></td></tr>
+    <tr><td class="command"><span class="cmd">git remote -v</span></td><td>Show configured remotes.</td></tr>
+    <tr><td class="command"><span class="cmd">git remote add origin &lt;url&gt;</span></td><td>Add remote. <span class="example">git remote add origin https://github.com/you/repo.git</span></td></tr>
+    <tr><td class="command"><span class="cmd">git remote set-url origin &lt;url&gt;</span></td><td>Change remote URL. <span class="example">git remote set-url origin git@github.com:you/repo.git</span></td></tr>
+  </table>
+
+  <h2>Staging &amp; Committing</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git status</span></td><td>Show working tree status. <span class="example">git status</span></td></tr>
+    <tr><td class="command"><span class="cmd">git add &lt;file&gt;</span></td><td>Stage a file. <span class="example">git add index.html</span></td></tr>
+    <tr><td class="command"><span class="cmd">git add .</span></td><td>Stage all changes. <span class="example">git add .</span></td></tr>
+    <tr><td class="command"><span class="cmd">git restore --staged &lt;file&gt;</span></td><td>Unstage a file. <span class="example">git restore --staged index.html</span></td></tr>
+    <tr><td class="command"><span class="cmd">git commit -m "msg"</span></td><td>Commit staged changes. <span class="example">git commit -m "Initial commit"</span></td></tr>
+    <tr><td class="command"><span class="cmd">git commit -am "msg"</span></td><td>Stage tracked files &amp; commit. <span class="example">git commit -am "Update README"</span></td></tr>
+    <tr><td class="command"><span class="cmd">git commit --amend</span></td><td>Amend last commit (before push). <span class="example">git commit --amend -m "Fix typo"</span></td></tr>
+    <tr><td class="command"><span class="cmd">git log --oneline --graph --decorate --all</span></td><td>Compact visual history.</td></tr>
+  </table>
+
+  <h2>Branching</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git branch</span></td><td>List local branches. <span class="example">git branch</span></td></tr>
+    <tr><td class="command"><span class="cmd">git branch -a</span></td><td>List all branches (including remotes).</td></tr>
+    <tr><td class="command"><span class="cmd">git checkout -b &lt;name&gt;</span></td><td>Create &amp; switch to new branch. <span class="example">git checkout -b feature/login</span></td></tr>
+    <tr><td class="command"><span class="cmd">git switch &lt;name&gt;</span></td><td>Switch branch (modern). <span class="example">git switch main</span></td></tr>
+    <tr><td class="command"><span class="cmd">git branch -d &lt;name&gt;</span></td><td>Delete local branch (safe). <span class="example">git branch -d feature/x</span></td></tr>
+    <tr><td class="command"><span class="cmd">git branch -D &lt;name&gt;</span></td><td>Force delete local branch.</td></tr>
+    <tr><td class="command"><span class="cmd">git merge &lt;branch&gt;</span></td><td>Merge branch into current. <span class="example">git merge feature/login</span></td></tr>
+    <tr><td class="command"><span class="cmd">git rebase &lt;base&gt;</span></td><td>Reapply commits onto base (linear history). <span class="example">git rebase main</span></td></tr>
+    <tr><td class="command"><span class="cmd">git rebase -i HEAD~n</span></td><td>Interactive rebase to squash/reorder commits.</td></tr>
+    <tr><td class="command"><span class="cmd">git cherry-pick &lt;commit&gt;</span></td><td>Apply a single commit on current branch. <span class="example">git cherry-pick a1b2c3</span></td></tr>
+  </table>
+
+  <h2>Remote Operations (Push / Pull / Fetch)</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git fetch</span></td><td>Download remote updates (no merge). <span class="example">git fetch origin</span></td></tr>
+    <tr><td class="command"><span class="cmd">git pull</span></td><td>Fetch + merge. <span class="example">git pull</span></td></tr>
+    <tr><td class="command"><span class="cmd">git pull --rebase</span></td><td>Fetch &amp; rebase local commits onto remote. <span class="example">git pull --rebase origin main</span></td></tr>
+    <tr><td class="command"><span class="cmd">git push</span></td><td>Push current branch to upstream. <span class="example">git push origin main</span></td></tr>
+    <tr><td class="command"><span class="cmd">git push -u origin &lt;branch&gt;</span></td><td>Push &amp; set upstream. <span class="example">git push -u origin feature/login</span></td></tr>
+    <tr><td class="command"><span class="cmd">git push --force-with-lease</span></td><td>Safer force-push: fail if remote changed unexpectedly.</td></tr>
+    <tr><td class="command"><span class="cmd">git push origin --delete &lt;branch&gt;</span></td><td>Delete remote branch.</td></tr>
+    <tr><td class="command"><span class="cmd">git fetch --all --prune</span></td><td>Fetch all remotes &amp; remove deleted refs.</td></tr>
+  </table>
+
+  <h2>Viewing Diffs &amp; History</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git diff</span></td><td>Show unstaged changes.</td></tr>
+    <tr><td class="command"><span class="cmd">git diff --staged</span></td><td>Show staged changes.</td></tr>
+    <tr><td class="command"><span class="cmd">git diff branch1..branch2</span></td><td>Diff between two branches. <span class="example">git diff main..feature/x</span></td></tr>
+    <tr><td class="command"><span class="cmd">git show &lt;commit&gt;</span></td><td>Show commit details and changes.</td></tr>
+    <tr><td class="command"><span class="cmd">git blame &lt;file&gt;</span></td><td>Show author for each line of a file.</td></tr>
+    <tr><td class="command"><span class="cmd">git reflog</span></td><td>View reference log (helpful to recover lost commits).</td></tr>
+  </table>
+
+  <h2>Undoing Changes &amp; Recovery</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git restore &lt;file&gt;</span></td><td>Discard unstaged changes in working tree. <span class="example">git restore index.html</span></td></tr>
+    <tr><td class="command"><span class="cmd">git restore --staged &lt;file&gt;</span></td><td>Unstage a file. <span class="example">git restore --staged index.html</span></td></tr>
+    <tr><td class="command"><span class="cmd">git reset --soft HEAD~1</span></td><td>Undo last commit but keep changes staged.</td></tr>
+    <tr><td class="command"><span class="cmd">git reset --mixed HEAD~1</span></td><td>Undo last commit and keep changes unstaged.</td></tr>
+    <tr><td class="command"><span class="cmd">git reset --hard HEAD~1</span></td><td>Destructive: remove last commit and changes (local).</td></tr>
+    <tr><td class="command"><span class="cmd">git revert &lt;commit&gt;</span></td><td>Make new commit that undoes the given commit (safe for shared branches).</td></tr>
+    <tr><td class="command"><span class="cmd">git clean -fd</span></td><td>Remove untracked files and directories (careful!).</td></tr>
+  </table>
+
+  <h2>Stashing (temporary save)</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git stash</span></td><td>Temporarily save local changes. <span class="example">git stash</span></td></tr>
+    <tr><td class="command"><span class="cmd">git stash list</span></td><td>List stashes.</td></tr>
+    <tr><td class="command"><span class="cmd">git stash apply</span></td><td>Reapply stash (keeps it).</td></tr>
+    <tr><td class="command"><span class="cmd">git stash pop</span></td><td>Reapply and remove top stash.</td></tr>
+    <tr><td class="command"><span class="cmd">git stash push -m "msg"</span></td><td>Save stash with message.</td></tr>
+  </table>
+
+  <h2>Tags &amp; Releases</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git tag -a v1.0 -m "msg"</span></td><td>Create annotated tag. <span class="example">git tag -a v1.0 -m "Release v1.0"</span></td></tr>
+    <tr><td class="command"><span class="cmd">git push origin v1.0</span></td><td>Push a tag. <span class="example">git push origin v1.0</span></td></tr>
+    <tr><td class="command"><span class="cmd">git push origin --tags</span></td><td>Push all tags.</td></tr>
+    <tr><td class="command"><span class="cmd">git tag -d v1.0</span></td><td>Delete local tag.</td></tr>
+    <tr><td class="command"><span class="cmd">git push origin :refs/tags/v1.0</span></td><td>Delete remote tag.</td></tr>
+  </table>
+
+  <h2>Advanced History Rewriting</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">git rebase -i HEAD~n</span></td><td>Interactive rebase for squash/reorder/fix commits.</td></tr>
+    <tr><td class="command"><span class="cmd">git commit --amend</span></td><td>Edit last commit (before push).</td></tr>
+    <tr><td class="command"><span class="cmd">git bisect</span></td><td>Binary search for the commit that introduced a bug.</td></tr>
+    <tr><td class="command"><span class="cmd">git filter-repo</span></td><td>Rewrite history (preferred to filter-branch) — use with care.</td></tr>
+  </table>
+
+  <h2>GitHub CLI (useful)</h2>
+  <table>
+    <tr><td class="command"><span class="cmd">gh auth login</span></td><td>Authenticate GitHub CLI.</td></tr>
+    <tr><td class="command"><span class="cmd">gh repo create</span></td><td>Create a new GitHub repo and push local code.</td></tr>
+    <tr><td class="command"><span class="cmd">gh pr create</span></td><td>Create PR from CLI. <span class="example">gh pr create --title "Add X" --body "desc"</span></td></tr>
+    <tr><td class="command"><span class="cmd">gh pr checkout &lt;id&gt;</span></td><td>Checkout a PR locally.</td></tr>
+    <tr><td class="command"><span class="cmd">gh issue create</span></td><td>Create GitHub issue from CLI.</td></tr>
+  </table>
+
+  <h2>Quick Reference — One-liners</h2>
+  <p class="small">
+    <span class="cmd">git init</span> • <span class="cmd">git clone &lt;url&gt;</span> • <span class="cmd">git add . &amp;&amp; git commit -m "msg"</span> •
+    <span class="cmd">git checkout -b &lt;branch&gt;</span> • <span class="cmd">git pull --rebase origin main</span> • <span class="cmd">git push -u origin &lt;branch&gt;</span> •
+    <span class="cmd">git stash</span> • <span class="cmd">git revert &lt;commit&gt;</span> • <span class="cmd">git push --force-with-lease</span>
+  </p>
+
+  <h2>Real-World Scenarios &amp; Step-by-Step Resolutions</h2>
+
+  <div class="scenario">
+    <strong>Scenario A — Files nested in a subfolder on GitHub (you want files at root)</strong>
+    <p>Cause: You initialized/pushed from inside parent folder so Git tracked the inner folder as top-level content.</p>
+    <p><strong>Fix (recommended):</strong> Initialize Git inside the inner project folder so only its contents are tracked.</p>
+    <pre>
+cd demo-repo/localRepo
+git init
+git remote add origin https://github.com/you/demo-repo.git
+git add .
+git commit -m "Add project files"
+git branch -M main
+git push -u origin main
+    </pre>
+    <p class="note">Alternate: If .git must stay in parent, move files up, remove folder, commit the change and push.</p>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario B — Push rejected: non-fast-forward</strong>
+    <p>Cause: Remote has commits you don’t have locally.</p>
+    <p><strong>Safe fix:</strong></p>
+    <pre>
+git pull --rebase origin main
+# resolve conflicts if any
+git push origin main
+    </pre>
+    <p class="note">If you intentionally want to overwrite remote (coordinate with team): <span class="cmd">git push --force-with-lease origin main</span>.</p>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario C — Merge conflict while merging or rebasing</strong>
+    <p>Steps to resolve:</p>
+    <pre>
+git status                      # shows conflicted files
+# open files and resolve <<<<<<< >>>>>>> markers
+git add <resolved-file>
+# if merge: git commit
+# if rebase: git rebase --continue
+git push origin your-branch
+    </pre>
+    <p class="note">Use VS Code merge editor or <span class="cmd">git mergetool</span> for guided resolution.</p>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario D — Sensitive file committed and pushed (API key)</strong>
+    <ol>
+      <li>Rotate / revoke the exposed credentials immediately.</li>
+      <li>Remove file and add to .gitignore:
+        <pre>git rm --cached secret.txt
+echo "secret.txt" &gt;&gt; .gitignore
+git commit -m "Remove secret and add to .gitignore"
+git push origin main</pre>
+      </li>
+      <li>To remove from history (coordination required): use <span class="cmd">git filter-repo</span> then force-push with lease.</li>
+    </ol>
+    <p class="note">Rewriting history affects all collaborators — communicate first.</p>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario E — Someone pushed directly to main and build broke</strong>
+    <p>Fast revert and hotfix:</p>
+    <pre>
+git checkout main
+git pull origin main
+git revert &lt;bad-commit-hash&gt;
+git push origin main
+# create hotfix branch if needed
+git checkout -b hotfix/fix-build
+# fix, commit, open PR
+    </pre>
+    <p class="note">Protect main branch with branch rules to prevent direct pushes.</p>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario F — Recover lost commit after reset</strong>
+    <pre>
+git reflog
+# find commit hash (abc123)
+git checkout -b recovered abc123
+    </pre>
+    <p class="note">Reflog shows local movement, even after destructive commands.</p>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario G — Switch branches but have uncommitted work</strong>
+    <pre>
+git stash push -m "WIP: work"
+git switch other-branch
+# later
+git switch feature-branch
+git stash pop
+    </pre>
+    <p class="note">Or commit to a WIP branch to preserve history.</p>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario H — Cherry-pick bug fix into release branch</strong>
+    <pre>
+git log                      # find commit hash a1b2c3 on feature branch
+git checkout release/1.0
+git cherry-pick a1b2c3
+git push origin release/1.0
+    </pre>
+  </div>
+
+  <div class="scenario">
+    <strong>Scenario I — Squash multiple commits before merging</strong>
+    <pre>
+git checkout feature/x
+git rebase -i HEAD~5
+# mark commits as 's' (squash) or 'f' (fixup)
+git push --force-with-lease origin feature/x
+    </pre>
+    <p class="note">Coordinate with team before force-pushing rebased branches.</p>
+  </div>
+
+  <h2>Interview Focus: Common Commands to Practice</h2>
+  <p class="small">Memorize and be ready to demonstrate these live:</p>
+  <ul class="small">
+    <li><span class="cmd">git init</span>, <span class="cmd">git clone &lt;url&gt;</span>, <span class="cmd">git add .</span>, <span class="cmd">git commit -m "msg"</span></li>
+    <li><span class="cmd">git checkout -b &lt;branch&gt;</span>, <span class="cmd">git pull --rebase origin main</span>, <span class="cmd">git push -u origin &lt;branch&gt;</span></li>
+    <li><span class="cmd">git merge &lt;branch&gt;</span> vs <span class="cmd">git rebase &lt;base&gt;</span>, <span class="cmd">git revert &lt;commit&gt;</span></li>
+    <li><span class="cmd">git stash</span>, <span class="cmd">git reflog</span>, <span class="cmd">git reset --hard &lt;commit&gt;</span> (know risks)</li>
+  </ul>
+
+  <h2>Best Practices to Mention in Interviews</h2>
+  <ul class="small">
+    <li>Use feature branches for each task; open PRs for reviews and CI checks.</li>
+    <li>Keep commits small and descriptive (imperative style).</li>
+    <li>Protect main with branch protection rules &amp; require passing CI checks.</li>
+    <li>Prefer <span class="cmd">git revert</span> for undoing public commits; use <span class="cmd">--force-with-lease</span> when rewriting history.</li>
+    <li>Always <span class="cmd">.gitignore</span> generated files and never commit secrets (rotate keys immediately if leaked).</li>
+  </ul>
+
+  <footer>
+    <strong>How to save as PDF:</strong> After opening this file in a browser → File → Print → Destination: "Save as PDF" → Paper: A4 → Save.<br>
+    Need a one-page condensed version or a different layout (two-column PDF) — reply and I'll generate alternate HTML for you.
+  </footer>
+</body>
+</html>
